@@ -47,13 +47,10 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-base-100 text-black"
               >
                 <li>
-                  <Link href="">Aduan</Link>
+                  <Link href="" className="active:!bg-secondary-content">Aduan</Link>
                 </li>
                 <li>
-                  <Link href="">Aspirasi</Link>
-                </li>
-                <li>
-                  <Link href="">Hubungi Kami</Link>
+                  <Link href="" className="active:!bg-secondary-content">Aspirasi</Link>
                 </li>
                 <li>
                   <details open>
@@ -84,9 +81,6 @@ const Navbar = () => {
                 <Link href="">Aspirasi</Link>
               </li>
               <li>
-                <Link href="">Hubungi Kami</Link>
-              </li>
-              <li>
                 <details className="dropdown">
                   <summary>Profil</summary>
                   <ul className="p-2 menu dropdown-content text-black bg-base-100 w-52">
@@ -105,7 +99,7 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <Link className="btn bg-accent border-transparent hover:bg-accent-content hover:border-primary" href="">
+            <Link className="btn bg-accent border-0 hover:border-0 hover:bg-accent-content hover:border-primary" href="">
               Tulis Laporan
             </Link>
           </div>

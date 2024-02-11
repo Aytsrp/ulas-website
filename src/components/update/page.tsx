@@ -39,7 +39,6 @@ const Update = () => {
     return (
         <>
             <div className="p-20 min-h-screen h-full bg-secondary snap-center">
-
                 <div className="h-1/2 mx-auto max-w-7xl mb-8 px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl text-center">
                         <p className="font-bold text-primary text-4xl">Laporan Terkini</p>
@@ -65,7 +64,7 @@ const Update = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="h-1/2 mx-auto max-w-7xl p-20">
+                <div className="h-1/2 mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto max-w-2xl text-center">
                         <p className="font-bold text-primary text-4xl">Statistik Laporan</p>
                     </div>

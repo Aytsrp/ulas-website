@@ -92,7 +92,7 @@ const Content = () => {
                                         </div>
                                         {category.name}
                                     </dt>
-                                    <dd className="mt-1 text-base leading-7 text-sm text-gray-600">{category.description}</dd>
+                                    <dd className="mt-1 leading-7 text-sm text-gray-600">{category.description}</dd>
                                 </div>
                             ))}
                         </dl>
