@@ -1,3 +1,5 @@
+"use client"
+import { JSX, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -8,43 +10,48 @@ import {
   MdExitToApp,
 } from "react-icons/md";
 import Logo from "/public/assets/ulas_logo2.png";
+import AdminDefault from "@/app/admin/default";
+import AdminAkun from '@/app/admin/akun';
+import AdminLaporan from '@/app/admin/laporan';
+import AdminTanggapan from '@/app/admin/tanggapan';
 
 const data = [
   {
-    link: "",
     label: "Akun",
     icon: MdGroup,
+    component: AdminAkun,
   },
   {
-    link: "",
     label: "Laporan",
     icon: MdAssignment,
+    component: AdminLaporan,
   },
   {
-    link: "",
     label: "Tanggapan",
     icon: MdComment,
+    component: AdminTanggapan,
   },
 ];
 
 const Sidebar = () => {
-  const links = data.map((item) => (
+  const [ActiveComponent, setActiveComponent] = useState(() => AdminDefault);
+  const handleButtonClick = (Component: () => JSX.Element) => {
+    setActiveComponent(() => Component);
+  };
+    const routes = data.map((item) => (
     <li key={item.label}>
-      <Link
-        href={item.link}
-        className="flex text-center items-center mx-2 my-1 p-2 font-medium rounded-md active:!bg-secondary-content"
-      >
+      <button onClick={() => handleButtonClick(item.component)} className="flex text-center items-center mx-2 my-1 p-2 font-medium rounded-md active:!bg-secondary-content">
         <item.icon className="w-6 h-6" />
         <span>{item.label}</span>
-      </Link>
+      </button>
     </li>
   ));
   return (
     <>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer bg-primary lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
-          {/* Page content here */}
+          <ActiveComponent/>
           <label
             htmlFor="my-drawer-2"
             className="btn btn-primary drawer-button p-2 h-12 w-12 bg-secondary border-0 hover:bg-secondary-content lg:hidden"
@@ -62,7 +69,7 @@ const Sidebar = () => {
             <div className="bg-accent p-10 border-b-2 border-primary">
               <Image src={Logo} alt="ulas logo" />
             </div>
-            {links}
+            {routes}
             <li className="mt-auto border-t border-primary">
               <Link
                 href="/"
