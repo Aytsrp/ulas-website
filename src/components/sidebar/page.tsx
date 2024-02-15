@@ -8,18 +8,31 @@ import {
   MdAssignment,
   MdComment,
   MdExitToApp,
+  MdHome,
+  MdSecurity,
 } from "react-icons/md";
 import Logo from "/public/assets/ulas_logo2.png";
-import AdminDefault from "@/app/admin/default";
-import AdminAkun from '@/app/admin/akun';
-import AdminLaporan from '@/app/admin/laporan';
-import AdminTanggapan from '@/app/admin/tanggapan';
+import AdminDefault from "@/components/admin/default";
+import AdminMasyarakat from '@/components/admin/masyarakat';
+import AdminPetugas from '@/components/admin/petugas';
+import AdminLaporan from '@/components/admin/laporan';
+import AdminTanggapan from '@/components/admin/tanggapan';
 
 const data = [
   {
-    label: "Akun",
+    label: "Beranda",
+    icon: MdHome,
+    component: AdminDefault,
+  },
+  {
+    label: "Akun Masyarakat",
     icon: MdGroup,
-    component: AdminAkun,
+    component: AdminMasyarakat,
+  },
+  {
+    label: "Akun Petugas",
+    icon: MdSecurity,
+    component: AdminPetugas,
   },
   {
     label: "Laporan",
@@ -51,13 +64,13 @@ const Sidebar = () => {
       <div className="drawer bg-primary lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
-          <ActiveComponent/>
-          <label
+        <label
             htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button p-2 h-12 w-12 bg-secondary border-0 hover:bg-secondary-content lg:hidden"
+            className="btn btn-primary drawer-button p-2 h-12 m-2 w-12 bg-secondary border-0 hover:bg-secondary-content lg:hidden"
           >
             <MdMenu className="h-full w-full text-primary" />
           </label>
+          <ActiveComponent/>
         </div>
         <div className="drawer-side rounded-r-lg">
           <label
