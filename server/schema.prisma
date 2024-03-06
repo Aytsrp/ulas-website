@@ -1,0 +1,66 @@
+model Masyarakat {
+  id_masyarakat Int    @id @unique @default(autoincrement())
+  nik           String
+  name          String
+  username      String
+  password      String
+  telepon       String
+  role          role   @default(USER)
+}
+
+model Petugas {
+  id_petugas Int      @id @unique @default(autoincrement())
+  name       String
+  username   String
+  password   String
+  instansi   instansi
+  telepon    String
+  role       role     @default(OFFICER)
+}
+
+model Laporan {
+  id_laporan       Int           @id @unique @default(autoincrement())
+  nik              Masyarakat
+  title            String
+  content          String
+  jenis_laporan    jenis_laporan
+  kategori_laporan instansi
+  lampiran         String?
+  laporan_date     DateTime      @default(now()) @updatedAt
+  status           status        @default(Proses)
+}
+
+model Tanggapan {
+  id_tanggapan   Int      @id @unique @default(autoincrement())
+  id_laporan     Laporan
+  content        String
+  tanggapan_date DateTime @default(now()) @updatedAt
+  id_petugas     Petugas
+}
+
+enum role {
+  ADMIN
+  OFFICER
+  USER
+}
+
+enum instansi {
+  Ekonomi dan Pengembangan Usaha
+  Pendidikan dan Sumber Daya Manusia
+  Kesehatan dan Lingkungan Hidup
+  Infrastruktur dan Lingkungan
+  Pelayanan Publik
+  Pemukiman dan Perumahan
+  Keamanan dan Ketertiban
+  Sosial dan Budaya
+}
+
+enum jenis_laporan {
+  Aduan
+  Aspirasi
+}
+
+enum status {
+  Terselesaikan
+  Proses
+}
