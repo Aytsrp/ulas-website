@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Masyarakat {
+  id_masyarakat Int       @id @unique @default(autoincrement())
+  nik           String
+  name          String
+  username      String
+  password      String
+  telepon       String
+  role          role      @default(USER)
+  Laporan       Laporan[]
+}
+
+model Petugas {
+  id_petugas Int         @id @unique @default(autoincrement())
+  name       String
+  username   String
+  password   String
+  instansi   instansi
+  telepon    String
+  role       role        @default(OFFICER)
+  Tanggapan  Tanggapan[]
+}
+
+model Laporan {
+  id_laporan              Int           @id @unique @default(autoincrement())
+  id_masyarakat                     Masyarakat    @relation(fields: [masyarakatId_masyarakat], references: [id_masyarakat])
+  title                   String
+  content                 String
+  jenis_laporan           jenis_laporan
+  kategori_laporan        instansi
+  lampiran                String?
+  laporan_date            DateTime      @default(now()) @updatedAt
+  status                  status        @default(Proses)
+  masyarakatId_masyarakat Int
+  Tanggapan               Tanggapan[]
+}
+
+model Tanggapan {
+  id_tanggapan      Int      @id @unique @default(autoincrement())
+  id_laporan        Laporan  @relation(fields: [laporanId_laporan], references: [id_laporan])
+  content           String
+  tanggapan_date    DateTime @default(now()) @updatedAt
+  id_petugas        Petugas  @relation(fields: [petugasId_petugas], references: [id_petugas])
+  laporanId_laporan Int
+  petugasId_petugas Int
+}
+
+enum role {
+  ADMIN
+  OFFICER
+  USER
+}
+
+enum instansi {
+  Ekonomi
+  Pendidikan
+  Kesehatan
+  Infrastruktur
+  Pelayanan
+  Pemukiman
+  Keamanan
+  Sosial
+}
+
+enum jenis_laporan {
+  Aduan
+  Aspirasi
+}
+
+enum status {
+  Proses
+  Terselesaikan
+}
